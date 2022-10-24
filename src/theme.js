@@ -3,12 +3,18 @@ export default {
         primary: '#F2F2F2',
         overlay: '#979797',
         info: '#4661E6',
+        darkBlue: '#373F68',
+        purple: '#AD1FEA',
+        light: '#ffffff',
     },
     fonts: {
         colors: {
+            primary: '#F2F2F2',
             light: '#ffffff',
             info: '#4661E6',
-            primary: '#F2F2F2',
+            darkBlue: '#3A4374',
+            blue: '#647196'
+            
         },
         names:{
             primary: "'Jost', sans-serif",

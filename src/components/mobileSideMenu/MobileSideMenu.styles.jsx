@@ -2,16 +2,18 @@ import Styled from "styled-components";
 
 export const MobileMenuContainer = Styled.div`
     background:rgba(0,0,0,0.5);
-    height:calc(100vh - 72px);
-    transition:0.3s ease-in-out;
-    width:${(props) => (props.display ? "100%" : "0%")};
+    height:100%;
+    display: ${(props) => (props.display ? "flex" : "none")};
+    transition: opacity 0.3s ease-in-out;
+    opacity: ${(props) => (props.display ? 1 : 0)};
     position:absolute;
     top:0;
     right:0;
     display:flex;
     justify-content:flex-end;
     overflow:hidden;
-    @media(min-width:376px){
+    z-index:2;
+    @media(min-width:486px){
         display:none;
     }
 `;
@@ -19,5 +21,8 @@ export const MobileMenuContainer = Styled.div`
 export const MobileMenu = Styled.div`
     background:${(props) => props.theme.background.primary};
     height:100%;
-    width:75%;
+    transition-delay: 0.3s;
+    transition:0.2s ease-in-out;
+    width:${(props) => (props.display ? "75%" : "0")};
+    
 `;

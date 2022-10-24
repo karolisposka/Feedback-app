@@ -2,8 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as S from "./CategoryItem.styles";
 
-const CategoryItem = ({ to, text }) => {
-  return <S.Link to={to}>{text}</S.Link>;
+const CategoryItem = ({ to, text, className }) => {
+  return (
+    <S.Link to={to} className={className}>
+      {text}
+    </S.Link>
+  );
 };
 
 CategoryItem.propTypes = {

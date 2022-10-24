@@ -13,6 +13,7 @@ export const Link = Styled(NavLink)`
     line-height:19px;
     margin:4px;
     border-radius:12px;
+    transition: 0.2s ease-in-out;
     &.active {
       background: ${(props) => props.theme.background.info};
       color: ${(props) => props.theme.background.primary};

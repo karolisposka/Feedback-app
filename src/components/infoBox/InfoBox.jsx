@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as S from "./InfoBox.styles";
 
-const InfoBox = ({ children }) => {
+const InfoBox = ({ children, className }) => {
   return (
-    <S.Container>
+    <S.Container className={className}>
       <S.ContentWrapper>{children}</S.ContentWrapper>
     </S.Container>
   );

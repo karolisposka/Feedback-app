@@ -3,9 +3,9 @@ import * as S from "./Categories.styles";
 import PropTypes from "prop-types";
 import CategoryItem from "../categoryItem/CategoryItem";
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, className }) => {
   return (
-    <S.CategoriesList>
+    <S.CategoriesList className={className}>
       {categories ? (
         categories.map((category, index) => <CategoryItem to={category.to} key={index} text={category.text} />)
       ) : (

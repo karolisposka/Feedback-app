@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { mobileMenuContext } from "../../context/mobileContext";
 import * as S from "./MobileSideMenu.styles";
-import Categories from "../categories/Categories";
 import InfoBox from "../infoBox/InfoBox";
+import Categories from "../categories/Categories";
+import RoadMap from "../../components/roadMap/RoadMap";
 
 const categories = [
   {
@@ -39,6 +40,9 @@ const MobileSideMenu = () => {
       <S.MobileMenu display={displayMobileMenu}>
         <InfoBox>
           <Categories categories={categories} />
+        </InfoBox>
+        <InfoBox>
+          <RoadMap />
         </InfoBox>
       </S.MobileMenu>
     </S.MobileMenuContainer>
