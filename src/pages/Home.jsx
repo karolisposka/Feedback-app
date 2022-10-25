@@ -46,7 +46,7 @@ const Home = () => {
           <MobileSideMenu />
           <Section>
             <SortSection />
-            <SuggestionsList list={null} />
+            <SuggestionsList list={data.productRequests} />
           </Section>
         </Container>
       </MainContainer>

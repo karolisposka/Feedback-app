@@ -7,6 +7,7 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 export const Container = Styled.div`
   background:${(props) => props.theme.background.light};
   padding:1rem;
+  width:100%;
   display:inline-grid;
   grid-template-columns: 1fr repeat(3);
   grid-template-rows: 1fr repeat(4);
@@ -99,6 +100,7 @@ export const Comments = Styled.div`
 
 export const ChatIcon = Styled(BsFillChatFill)`
   color:${(props) => props.theme.background.primary};
+  cursor:pointer;
 `;
 
 export const Span = Styled.span`

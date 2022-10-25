@@ -11,7 +11,7 @@ const Select = ({ className, options, styles, placeholder, handleChange }) => {
       components={{ IndicatorSeparator: () => null }}
       placeholder={placeholder}
       onChange={(e) => {
-        handleChange(e);
+        handleChange(e.value);
       }}
     />
   );

@@ -9,12 +9,13 @@ const SuggestionsList = ({ list }) => {
         list.map((listItem, index) => {
           return (
             <S.ListCard
+              id={listItem.id}
               title={listItem.title}
               key={index}
               text={listItem.description}
               category={listItem.category}
               upwotes={listItem.upvotes}
-              //   comments={listItem.comments.length}
+              comments={listItem.comments}
             />
           );
         })

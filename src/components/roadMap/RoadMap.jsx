@@ -25,7 +25,7 @@ const RoadMap = ({ className }) => {
     <S.Container className={className}>
       <S.TitleWrapper>
         <S.Title>Roadmap</S.Title>
-        <S.StyledLink to="/roadmap">view</S.StyledLink>
+        <S.StyledLink to="/roadmap/in-progress">view</S.StyledLink>
       </S.TitleWrapper>
       <S.List>
         {items &&
