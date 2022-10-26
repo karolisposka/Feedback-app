@@ -10,7 +10,6 @@ import AddComment from "../components/addCommentForm/AddComment";
 const SingleSuggestion = () => {
   const { id } = useParams();
   const filteredData = data.productRequests.filter((item) => Number(item.id) === Number(id));
-  console.log(filteredData);
 
   return (
     <SingleSuggestionContainer>

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as S from "./Select.styles";
 
-const Select = ({ className, options, styles, placeholder, handleChange }) => {
+const Select = ({ className, options, styles, placeholder, handleChange, handleBlur }) => {
   return (
     <S.StyledSelect
       className={className}
@@ -10,6 +10,7 @@ const Select = ({ className, options, styles, placeholder, handleChange }) => {
       styles={styles}
       components={{ IndicatorSeparator: () => null }}
       placeholder={placeholder}
+      onBlur={handleBlur}
       onChange={(e) => {
         handleChange(e.value);
       }}

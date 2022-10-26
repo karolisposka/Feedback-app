@@ -45,11 +45,11 @@ export const TextArea = Styled.textarea`
   border-radius:8px;
   background:${(props) => props.theme.background.primary};
   border:none;
-  outline: ${(props) => (props.error ? "1px solid red" : "none")};
+  outline: ${(props) => (props.error ? "1px solid #D73737" : "none")};
   height:120px;
   resize:none;
   &:focus{
-    outline: ${(props) => (props.error ? "1px solid red" : "1px solid blue")};
+    outline: ${(props) => (props.error ? "1px solid #D73737" : "1px solid #4661E6")};
   }
 `;
 

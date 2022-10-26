@@ -3,7 +3,6 @@ export default {
         primary: '#F2F2F2',
         overlay: '#979797',
         info: '#4661E6',
-
         darkBlue: '#373F68',
         purple: '#AD1FEA',
         light: '#ffffff',

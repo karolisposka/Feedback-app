@@ -24,9 +24,9 @@ export const TextArea = Styled.textarea`
     resize:none;
     padding:1rem;
     margin:8px 0;
-    outline:${(props) => (props.error ? "3px solid red" : null)};
+    outline:${(props) => (props.error ? "1px solid #D73737" : null)};
     &:focus{
-        outline:${(props) => (!props.error ? "3px solid #4661E6" : "3px solid red")};
+        outline:${(props) => (!props.error ? "1px solid #4661E6" : "1px solid #D73737")};
     }
 `;
 

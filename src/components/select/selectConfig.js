@@ -140,3 +140,18 @@ export const Categories = [
       label: "Feature",
     },
 ]
+
+export const status = [
+  {
+    value: "planned",
+     label: "Planned",
+   },
+   {
+     value: "in-progress",
+     label: "In-Prgoress",
+   },
+   {
+     value: "live",
+     label: "Live",
+   }
+]

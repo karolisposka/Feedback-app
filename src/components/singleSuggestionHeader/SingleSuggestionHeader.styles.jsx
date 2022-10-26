@@ -3,11 +3,10 @@ import Button from "../button/Button";
 import BackBtn from "../backButton/BackBtn";
 
 export const Header = Styled.div`
-  width:calc(100% - 48px);
   display:flex;
   justify-content:space-between;
   align-items:Center;
-  padding:24px;
+  padding:12px;
 
 `;
 
@@ -17,6 +16,6 @@ export const Back = Styled(BackBtn)`
 
 export const EditButton = Styled(Button)`
   background:${(props) => props.theme.fonts.colors.info};
-  padding:0.5rem 1rem;
+  /* padding:0.5rem 1rem; */
 
 `;

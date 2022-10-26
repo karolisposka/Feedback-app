@@ -74,8 +74,9 @@ export const Upwotes = Styled.div`
     grid-row: 1/3;
     flex-direction:column;
     align-items:Center;
+    justify-content:Center;
     padding:8px 0px;
-    width:50%;
+    width:75%;
     margin: 0;
   }
 `;
@@ -101,6 +102,7 @@ export const Comments = Styled.div`
 export const ChatIcon = Styled(BsFillChatFill)`
   color:${(props) => props.theme.background.primary};
   cursor:pointer;
+  margin-right:4px;
 `;
 
 export const Span = Styled.span`

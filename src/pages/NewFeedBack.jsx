@@ -1,14 +1,14 @@
 import React from "react";
 import BackBtn from "../components/backButton/BackBtn";
-import MainContainer from "../components/mainContainer/MainContainer";
+import AddFeedbackContainer from "../components/addFeedbackContainer/AddFeedbackContainer";
 import NewFeedbackForm from "../components/newFeedbackForm/NewFeedbackForm";
 
 const NewFeedBack = () => {
   return (
-    <MainContainer>
+    <AddFeedbackContainer>
       <BackBtn />
       <NewFeedbackForm />
-    </MainContainer>
+    </AddFeedbackContainer>
   );
 };
 
