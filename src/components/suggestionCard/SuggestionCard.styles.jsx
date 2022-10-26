@@ -58,11 +58,12 @@ export const Category = Styled(CategoryItem)`
   }
 `;
 
-export const Upwotes = Styled.div`
+export const Upvotes = Styled.div`
   background:${(props) => props.theme.background.primary};
   grid-column: 1;
   grid-row:4;
   margin-top:12px;
+  cursor:pointer;
   border-radius:8px;
   display:flex;
   align-items:center;

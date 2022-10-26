@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as S from "./RoadMapList.styles";
+import Loader from "../loader/Loader";
 import data from "../../assets/data/data.json";
 
 const RoadMapList = () => {
@@ -71,7 +72,7 @@ const RoadMapList = () => {
             />
           ))
         ) : (
-          <div>loading</div>
+          <Loader />
         )}
       </S.List>
     </S.Container>

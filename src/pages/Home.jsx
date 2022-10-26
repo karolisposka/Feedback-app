@@ -5,6 +5,7 @@ import { suggestionsRecieved, errorRecieved } from "../store/slices/suggestionsS
 import MainContainer from "../components/mainContainer/MainContainer";
 import Container from "../components/container/Container";
 import Section from "../components/section/Section";
+import Loader from "../components/loader/Loader";
 import Header from "../components/header/Header";
 import MobileSideMenu from "../components/mobileSideMenu/MobileSideMenu";
 import SortSection from "../components/sortSection/SortSection";
@@ -42,6 +43,7 @@ const categories = [
 
 const Home = () => {
   const dispatch = useDispatch();
+  const suggestions = useSelector(suggestionsSelector);
 
   const getSuggestions = async () => {
     try {
@@ -67,9 +69,6 @@ const Home = () => {
     getSuggestions();
   }, []);
 
-  const suggestions = useSelector(suggestionsSelector);
-  console.log(suggestions);
-
   return (
     <>
       <MainContainer>
@@ -77,8 +76,8 @@ const Home = () => {
         <Container>
           <MobileSideMenu />
           <Section>
-            <SortSection />
-            <SuggestionsList list={suggestions} />
+            <SortSection number={suggestions && suggestions.length} />
+            {suggestions ? <SuggestionsList list={suggestions} /> : <Loader />}
           </Section>
         </Container>
       </MainContainer>

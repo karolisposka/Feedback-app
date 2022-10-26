@@ -2,12 +2,12 @@ import React from "react";
 import { customStyles, optionsSort } from "../select/selectConfig";
 import * as S from "./SortSection.styles";
 
-const SortSection = () => {
+const SortSection = ({ number }) => {
   return (
     <S.Container>
       <S.InfoWrapper>
         <S.BulbIcon />
-        <S.Suggestions>6 Suggestions</S.Suggestions>
+        <S.Suggestions>{number} Suggestions</S.Suggestions>
       </S.InfoWrapper>
       <S.Span>Sort by : </S.Span>
       <S.StyledSelect

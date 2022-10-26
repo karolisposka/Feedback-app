@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Categories, newFeedbackCategories } from "../select/selectConfig";
 
-const NewFeedbackForm = () => {
+const NewFeedbackForm = ({ handleSubmit }) => {
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -17,14 +17,15 @@ const NewFeedbackForm = () => {
       category: Yup.string().required(),
       description: Yup.string().required(),
     }),
-    onSubmit: () => {
-      console.log(formik.values);
+    onSubmit: (values) => {
+      handleSubmit(values);
+      formik.resetForm();
     },
   });
 
   return (
     <S.Container>
-      <S.Form>
+      <S.Form onSubmit={formik.handleSubmit}>
         <S.Title>Create New Feedback</S.Title>
         <Input
           name="title"

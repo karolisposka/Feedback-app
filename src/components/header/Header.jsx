@@ -6,8 +6,6 @@ import * as S from "./Header.styles";
 
 const Header = ({ categories }) => {
   const [displayMobileMenu, setDisplayMobileMenu] = useContext(mobileMenuContext);
-  console.log(displayMobileMenu);
-
   return (
     <S.Header>
       <S.ContentWrapper>

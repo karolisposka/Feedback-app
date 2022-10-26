@@ -1,11 +1,12 @@
 import React from "react";
 import * as S from "./SuggestionsList.styles";
+import PropTypes from "prop-types";
 import Empty from "../empty/Empty";
 
 const SuggestionsList = ({ list }) => {
   return (
     <S.Container>
-      {list ? (
+      {list.length > 0 ? (
         list.map((listItem, index) => {
           return (
             <S.ListCard

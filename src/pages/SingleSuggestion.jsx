@@ -1,22 +1,58 @@
-import React from "react";
-import data from "../assets/data/data.json";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import SingleSuggestionContainer from "../components/singleSuggestionContainer/SingleSuggestionContainer";
 import SuggestionsList from "../components/suggestionsList/SuggestionsList";
 import SingleSuggestionHeader from "../components/singleSuggestionHeader/SingleSuggestionHeader";
 import CommentsList from "../components/commentsList/CommentsList";
+import Loader from "../components/loader/Loader";
 import AddComment from "../components/addCommentForm/AddComment";
 
 const SingleSuggestion = () => {
+  const [data, setData] = useState(null);
   const { id } = useParams();
-  const filteredData = data.productRequests.filter((item) => Number(item.id) === Number(id));
+
+  const getData = async (id) => {
+    try {
+      const res = await axios({
+        baseURL: process.env.REACT_APP_BASE_URL,
+        url: `/v1/suggestions/single/${id}`,
+        method: "get",
+      });
+      if (res.data.data) {
+        setData(res.data.data);
+      } else {
+        console.log("something wrong with the server. Please try again later");
+      }
+    } catch (err) {
+      console.log("Something is wrong with the server. Cannot get data");
+    }
+  };
+
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
+  useEffect(() => {
+    getData(id);
+  }, []);
 
   return (
     <SingleSuggestionContainer>
       <SingleSuggestionHeader />
-      <SuggestionsList list={filteredData} />
-      <CommentsList comments={filteredData[0].comments} />
-      <AddComment />
+      {data ? (
+        <>
+          <SuggestionsList list={data} />
+          <CommentsList comments={data} />
+        </>
+      ) : (
+        <Loader />
+      )}
+      <AddComment
+        handleSubmit={(values) => {
+          handleSubmit(values);
+        }}
+      />
     </SingleSuggestionContainer>
   );
 };

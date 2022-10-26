@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import * as S from "./AddComment.styles";
 
-const AddComment = () => {
+const AddComment = ({ handleSubmit }) => {
   const formik = useFormik({
     initialValues: {
       content: "",
@@ -12,12 +13,10 @@ const AddComment = () => {
       content: Yup.string().max(249, "content must be at most 250 characters").required(),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      handleSubmit(values);
       formik.resetForm();
     },
   });
-
-  console.log(formik.errors);
 
   return (
     <S.Form onSubmit={formik.handleSubmit}>
@@ -38,6 +37,10 @@ const AddComment = () => {
       </S.ButtonWrapper>
     </S.Form>
   );
+};
+
+AddComment.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default AddComment;

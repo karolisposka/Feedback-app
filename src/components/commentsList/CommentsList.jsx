@@ -2,17 +2,16 @@ import React from "react";
 import * as S from "./CommentsList.styles";
 
 const CommentsList = ({ comments }) => {
-  console.log(comments);
   return (
     <S.Container>
-      <S.Title>{comments.length} Comments</S.Title>
+      <S.Title>{comments && comments[0].comments.length} comments</S.Title>
       <S.List>
         {comments ? (
-          comments.map((item, index) => (
-            <S.Card key={index} text={item.content} name={item.user.name} username={item.user.username} />
+          comments[0].comments.map((item, index) => (
+            <S.Card key={index} text={item.content} name={item.user[0].name} username={item.user[0].username} />
           ))
         ) : (
-          <div>loading</div>
+          <div>no comment yet</div>
         )}
       </S.List>
     </S.Container>
