@@ -1,7 +1,9 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import React, {useState} from "react";
+import { store } from './store/storeConfig';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from "styled-components";
-import {mobileMenuContext} from '../src/context/mobileContext'
+import {mobileMenuContext} from '../src/context/mobileContext';
 import theme from './theme';
 import Home from "./pages/Home";
 import EditFeedBack from './pages/EditFeedBack';
@@ -14,6 +16,7 @@ const Router = () => {
   const [displayMobileMenu, setDisplayMobileMenu] = useState(false);
   return (
     <BrowserRouter>
+    <Provider store={store}>
     <mobileMenuContext.Provider value={[displayMobileMenu, setDisplayMobileMenu]}>
         <ThemeProvider theme={theme}>
           <Routes>
@@ -29,6 +32,7 @@ const Router = () => {
           </Routes>
         </ThemeProvider>
       </mobileMenuContext.Provider>
+      </Provider>
     </BrowserRouter>
   );
 };

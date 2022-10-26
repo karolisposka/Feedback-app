@@ -1,0 +1,1 @@
+export const suggestionsSelector = (state) => state.suggestions.suggestions;
