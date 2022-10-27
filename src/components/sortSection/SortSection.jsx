@@ -2,7 +2,7 @@ import React from "react";
 import { customStyles, optionsSort } from "../select/selectConfig";
 import * as S from "./SortSection.styles";
 
-const SortSection = ({ number }) => {
+const SortSection = ({ number, handleChange }) => {
   return (
     <S.Container>
       <S.InfoWrapper>
@@ -16,7 +16,7 @@ const SortSection = ({ number }) => {
         components={{ IndicatorSeparator: () => null }}
         placeholder="Sort"
         handleChange={(value) => {
-          console.log(value);
+          handleChange(value);
         }}
       />
       <S.StyledButton to="/new">+ Add Feedback </S.StyledButton>

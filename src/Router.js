@@ -10,7 +10,10 @@ import EditFeedBack from './pages/EditFeedBack';
 import NewFeedBack from "./pages/NewFeedBack";
 import RoadMap from './pages/RoadMap'
 import SingleSuggestion from "./pages/SingleSuggestion";
+import SuggestionsLayout from "./components/suggestionsLayout/SuggestionsLayout";
 import RoadMapList from "./components/roadMapList/RoadMapList";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 const Router = () => {
   const [displayMobileMenu, setDisplayMobileMenu] = useState(false);
@@ -21,11 +24,13 @@ const Router = () => {
         <ThemeProvider theme={theme}>
           <Routes>
             <Route exact path="/" element={<Home />}>
-              <Route path='filter/:category' element={<Home/>}/>
+              <Route path=':category' element={<SuggestionsLayout/>}/>
             </Route>
             <Route path='suggestion/:id' element={<SingleSuggestion/>}/>
             <Route exact path='/edit' element={<EditFeedBack/>}/>
             <Route exact path='/new' element={<NewFeedBack/>}/>
+            <Route exact path='/register' element={<Register/>}/>
+            <Route exact path='/login' element={<Login/>}/>
             <Route exact path='/roadmap' element={<RoadMap/>}>
               <Route exact path=':category' element={<RoadMapList/>}/>
             </Route>

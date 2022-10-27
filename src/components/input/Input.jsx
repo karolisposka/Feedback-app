@@ -6,7 +6,7 @@ const Input = ({ label, comment, placeholder, type, handleChange, handleBlur, er
     <S.InputContainer>
       <S.Label>{label}</S.Label>
       <S.Comment>{comment}</S.Comment>
-      {type === "text" ? (
+      {type === "text" || "email" || "password" ? (
         <S.Input
           name={name}
           type={type}

@@ -16,7 +16,7 @@ const SuggestionsList = ({ list }) => {
               text={listItem.description}
               category={listItem.category}
               upwotes={listItem.upvotes}
-              comments={listItem.comments}
+              comments={typeof listItem.comments === "object" ? listItem.comments.length : listItem.comments}
             />
           );
         })

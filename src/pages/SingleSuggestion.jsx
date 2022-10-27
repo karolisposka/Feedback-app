@@ -29,8 +29,25 @@ const SingleSuggestion = () => {
     }
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values, id) => {
+    try {
+      const res = await axios({
+        baseURL: process.env.REACT_APP_BASE_URL,
+        url: "v1/comments/add",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          ...values,
+          suggestion_id: id,
+        },
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+      console.log("Something wrong with the server. Please try again later");
+    }
   };
 
   useEffect(() => {
@@ -50,7 +67,7 @@ const SingleSuggestion = () => {
       )}
       <AddComment
         handleSubmit={(values) => {
-          handleSubmit(values);
+          handleSubmit(values, id);
         }}
       />
     </SingleSuggestionContainer>

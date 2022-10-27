@@ -1,4 +1,5 @@
 import Styled from "styled-components";
+import Button from "../button/Button";
 
 export const MobileMenuContainer = Styled.div`
     background:rgba(0,0,0,0.5);
@@ -25,4 +26,21 @@ export const MobileMenu = Styled.div`
     transition:0.2s ease-in-out;
     width:${(props) => (props.display ? "75%" : "0")};
     
+`;
+
+export const RegisterBtn = Styled(Button)`
+    margin:1.5rem;
+    padding:0.5rem 1.5rem;
+    width:calc(75% - 1.5rem);
+    display:block;
+
+`;
+
+export const LoginBtn = Styled(Button)`
+    margin:1.5rem;
+    background:${(props) => props.theme.background.danger};
+    padding:0.5rem 1.5rem;
+    width:calc(75% - 1.5rem);
+    display:block;
+
 `;

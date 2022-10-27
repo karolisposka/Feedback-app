@@ -1,9 +1,7 @@
 import Styled from "styled-components";
 
 export const Container = Styled.div`
-    &:not(:last-child){
-        border-bottom:1px solid rgba(0,0,0,0.1);
-    }  
+   
 `;
 
 export const UserInfoSection = Styled.section`
@@ -48,4 +46,5 @@ export const Text = Styled.p`
     font-weight:${(props) => props.theme.fonts.weight.medium};
     color:${(props) => props.theme.fonts.colors.blue};
     line-height:18.79px;
+    margin:0;
 `;

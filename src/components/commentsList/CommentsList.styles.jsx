@@ -22,4 +22,5 @@ export const List = Styled.div`
 
 export const Card = Styled(CommentCard)`
     width:100%;
+    padding:1rem 0;
 `;

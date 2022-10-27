@@ -8,7 +8,14 @@ const CommentsList = ({ comments }) => {
       <S.List>
         {comments ? (
           comments[0].comments.map((item, index) => (
-            <S.Card key={index} text={item.content} name={item.user[0].name} username={item.user[0].username} />
+            <S.Card
+              key={index}
+              id={item.id}
+              text={item.content}
+              name={item.user[0].name}
+              username={item.user[0].username}
+              replies={item.replies}
+            />
           ))
         ) : (
           <div>no comment yet</div>

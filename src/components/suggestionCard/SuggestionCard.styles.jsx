@@ -45,11 +45,21 @@ export const Text = Styled.p`
   }
 `;
 
-export const Category = Styled(CategoryItem)`
+export const Category = Styled.span`
   margin:4px 0;
   grid-column: 1 / 2;
   grid-row:3;
   border-radius:8px;
+  background: ${(props) => props.theme.background.primary};
+  color:${(props) => props.theme.fonts.colors.info};
+  font-family:${(props) => props.theme.fonts.names.primary};
+  text-decoration:none;
+  padding:5px 14px;
+  text-transform:capitalize;
+  font-weight:${(props) => props.theme.fonts.weight.medium};
+  font-size:13px;
+  line-height:19px;
+  border-radius:12px;
   @media(min-width:486px){
     grid-column: 2;
     display:inline;

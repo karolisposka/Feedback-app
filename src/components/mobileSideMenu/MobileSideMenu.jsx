@@ -7,27 +7,27 @@ import RoadMap from "../../components/roadMap/RoadMap";
 
 const categories = [
   {
-    to: "/filter/all",
+    to: "all",
     text: "all",
   },
   {
-    to: "/filter/UI",
+    to: "UI",
     text: "UI",
   },
   {
-    to: "/filter/UX",
+    to: "UX",
     text: "UX",
   },
   {
-    to: "/filter/Enchancment",
-    text: "Enchancment",
+    to: "Enhancement",
+    text: "Enhancement",
   },
   {
-    to: "/filter/Bug",
+    to: "Bug",
     text: "Bug",
   },
   {
-    to: "/filter/Feature",
+    to: "Feature",
     text: "Feature",
   },
 ];
@@ -44,6 +44,8 @@ const MobileSideMenu = () => {
         <InfoBox>
           <RoadMap />
         </InfoBox>
+        <S.RegisterBtn to="/register">Register</S.RegisterBtn>
+        <S.LoginBtn to="/login">Login</S.LoginBtn>
       </S.MobileMenu>
     </S.MobileMenuContainer>
   );

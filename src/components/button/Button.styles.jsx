@@ -11,4 +11,5 @@ export const Button = Styled(Link)`
     color:${(props) => props.theme.fonts.colors.light};
     font-family:${(props) => props.theme.fonts.names.primary};
     font-weight:${(props) => props.theme.fonts.weight.medium};
+    background:${(props) => props.theme.background.purple};
 `;

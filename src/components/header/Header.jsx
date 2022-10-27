@@ -21,22 +21,26 @@ const Header = ({ categories }) => {
         <S.Box>
           <RoadMap />
         </S.Box>
+        <S.Box>
+          <S.LoginBtn to="/login">Login</S.LoginBtn>
+          <S.RegisterBtn to="/register"> Register </S.RegisterBtn>
+        </S.Box>
         {!displayMobileMenu ? (
-          <S.Button>
+          <S.MenuButton>
             <S.BurgerMenu
               onClick={() => {
                 setDisplayMobileMenu(true);
               }}
             />
-          </S.Button>
+          </S.MenuButton>
         ) : (
-          <S.Button
+          <S.MenuButton
             onClick={() => {
               setDisplayMobileMenu(false);
             }}
           >
             <S.CloseBtn />
-          </S.Button>
+          </S.MenuButton>
         )}
       </S.ContentWrapper>
     </S.Header>

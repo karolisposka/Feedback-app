@@ -4,6 +4,7 @@ import Section from "../section/Section";
 import { FaBars } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import InfoBox from "../infoBox/InfoBox";
+import Button from "../button/Button";
 
 export const Header = Styled.header`
     width:100%;
@@ -94,6 +95,9 @@ export const Box = Styled(InfoBox)`
         width:calc(33% - 0.5rem)!important;
         margin:0;
         height:100%;
+        &&:last-of-type{
+            display:none;
+        }
     }
     @media(min-width:768px){
         display:block;
@@ -102,7 +106,7 @@ export const Box = Styled(InfoBox)`
     }
 `;
 
-export const Button = Styled.button`
+export const MenuButton = Styled.button`
     border:none;
     background:transparent;
     @media(min-width:486px){
@@ -133,4 +137,22 @@ export const CloseBtn = Styled(IoMdClose)`
     color:${(props) => props.theme.fonts.colors.light};
     font-size:1.2rem;
     animation: ${opacity} 0.2s ease-in-out;
+`;
+
+export const LoginBtn = Styled(Button)`
+    display:block;
+    width:100%;
+    background:${(props) => props.theme.background.purple};
+    margin:0.25rem 0;
+    padding:0.5rem 0;
+
+`;
+
+export const RegisterBtn = Styled(Button)`
+    display:block;
+    width:100%;
+    background:${(props) => props.theme.background.danger};
+    margin:0.25rem 0;
+    padding:0.5rem 0;
+    
 `;

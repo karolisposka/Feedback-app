@@ -6,11 +6,8 @@ import CategoryItem from "../categoryItem/CategoryItem";
 const Categories = ({ categories, className }) => {
   return (
     <S.CategoriesList className={className}>
-      {categories ? (
-        categories.map((category, index) => <CategoryItem to={category.to} key={index} text={category.text} />)
-      ) : (
-        <div> loading </div>
-      )}
+      {categories &&
+        categories.map((category, index) => <CategoryItem to={category.to} key={index} text={category.text} />)}
     </S.CategoriesList>
   );
 };

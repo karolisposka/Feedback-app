@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { suggestionsSelector } from "../../store/selectors";
 import * as S from "./RoadMap.styles";
 import RoadMapListItem from "../roadMapListItem/RoadMapListItem";
+import Loader from "../loader/Loader";
 
 const RoadMap = ({ className }) => {
   const suggestions = useSelector(suggestionsSelector);
@@ -32,10 +33,13 @@ const RoadMap = ({ className }) => {
         <S.StyledLink to="/roadmap/in-progress">view</S.StyledLink>
       </S.TitleWrapper>
       <S.List>
-        {items &&
+        {items ? (
           items.map((item, index) => (
             <RoadMapListItem key={index} status={item.status} color={item.color} number={item.number} />
-          ))}
+          ))
+        ) : (
+          <Loader />
+        )}
       </S.List>
     </S.Container>
   );

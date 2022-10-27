@@ -8,6 +8,7 @@ import * as S from "./SuggestionCard.styles";
 
 const SuggestionCard = ({ title, text, category, upwotes, comments, className, id }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const upvote = async (suggestion_id) => {
     try {
@@ -31,12 +32,11 @@ const SuggestionCard = ({ title, text, category, upwotes, comments, className, i
     }
   };
 
-  const navigate = useNavigate();
   return (
     <S.Container className={className}>
       <S.CardTitle>{title}</S.CardTitle>
       <S.Text>{text}</S.Text>
-      <S.Category to={`/${category}`} text={category} />
+      <S.Category>{category} </S.Category>
       <S.Upvotes
         onClick={() => {
           upvote(id);
@@ -48,10 +48,10 @@ const SuggestionCard = ({ title, text, category, upwotes, comments, className, i
       <S.Comments>
         <S.ChatIcon
           onClick={() => {
-            navigate(`suggestion/${id}`);
+            navigate(`/suggestion/${id}`);
           }}
         />
-        <S.Span>{comments ? comments.length : 0}</S.Span>
+        <S.Span>{comments ? comments : 0}</S.Span>
       </S.Comments>
     </S.Container>
   );
@@ -62,7 +62,7 @@ SuggestionCard.propTypes = {
   text: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   upwotes: PropTypes.number.isRequired,
-  comments: PropTypes.array,
+  comments: PropTypes.number.isRequired,
 };
 
 export default SuggestionCard;

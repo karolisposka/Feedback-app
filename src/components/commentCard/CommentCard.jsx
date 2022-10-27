@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import ReplyForm from "../replyForm/ReplyForm";
+import axios from "axios";
+import RepliesList from "../repliesList/RepliesList";
 import * as S from "./CommentCard.styles";
 
-const CommentCard = ({ text, username, name, className, imageUrl, id }) => {
+const CommentCard = ({ text, username, name, className, imageUrl, id, replies }) => {
   const [openReply, setOpenReply] = useState(false);
-  const formik = useFormik({
-    initialValues: {
-      content: "",
-    },
-    validationSchema: Yup.object({
-      content: Yup.string().max(249, "content must be at most 250 characters").required(),
-    }),
-    onSubmit: (values) => {
-      console.log(values);
-      formik.resetForm();
-    },
-  });
+
+  const handleReplySubmit = async (content, id) => {
+    try {
+      const res = await axios({
+        baseURL: process.env.REACT_APP_BASE_URL,
+        url: "v1/replies/add",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          ...content,
+          comment_id: id,
+        },
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.log("Oops something went wrong. Please try again later");
+    }
+  };
 
   return (
     <S.Container className={className} id={id}>
@@ -44,18 +53,14 @@ const CommentCard = ({ text, username, name, className, imageUrl, id }) => {
         </S.ReplyBtn>
       </S.UserInfoSection>
       <S.Text>{text}</S.Text>
+      {replies && <RepliesList replies={replies} />}
       {openReply && (
-        <S.ReplyContainer onSubmit={formik.handleSubmit}>
-          <S.TextArea
-            name="content"
-            placeholder="Type reply here..."
-            error={formik.errors.content}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.content}
-          />
-          <S.SubmitBtn type="submit"> Post Reply </S.SubmitBtn>
-        </S.ReplyContainer>
+        <ReplyForm
+          handleSubmit={(content) => {
+            console.log(id);
+            handleReplySubmit(content, id);
+          }}
+        />
       )}
     </S.Container>
   );

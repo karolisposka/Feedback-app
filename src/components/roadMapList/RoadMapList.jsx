@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { suggestionsSelector } from "../../store/selectors";
 import * as S from "./RoadMapList.styles";
 import Loader from "../loader/Loader";
-import data from "../../assets/data/data.json";
 
 const RoadMapList = () => {
+  const data = useSelector(suggestionsSelector);
   const { category } = useParams();
   const [items, setItems] = useState();
   const [color, setColor] = useState();
@@ -51,9 +53,9 @@ const RoadMapList = () => {
   };
 
   useEffect(() => {
-    setItems(filterData(data.productRequests, category));
+    setItems(filterData(data, category));
     borderColor(category);
-  }, [category]);
+  }, [category, data]);
 
   return (
     <S.Container>

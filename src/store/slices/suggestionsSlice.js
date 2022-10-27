@@ -41,9 +41,36 @@ const suggestionsSlice = createSlice({
             }
 
         },
+        sortedByLowestUpvotes:(state, action) =>{
+            return {
+                ...state,
+                suggestions: state.suggestions.slice().sort((a,b) => a.upvotes - b.upvotes)
+            }
+        },
+
+        sortedByHighestUpvotes :(state, action) =>{
+            return {
+                ...state,
+                suggestions: state.suggestions.slice().sort((a,b) => b.upvotes - a.upvotes)
+            }
+        },
+        sortedByLowestComments:(state, action) =>{
+            return {
+                ...state,
+                suggestions: state.suggestions.slice().sort((a,b) => a.comments - b.comments)
+            }
+        },
+        
+        sortedByHighestComments :(state, action) =>{
+            return {
+                ...state,
+                suggestions: state.suggestions.slice().sort((a,b) => b.comments - a.comments)
+            }
+        },
         errorRecieved: (state, action) => {
             return {
                 ...state,
+                suggestions: [],
                 error: action.payload,
                 message:null,
             }
@@ -51,5 +78,5 @@ const suggestionsSlice = createSlice({
     }
 })
 
-export const {suggestionsRecieved, suggestionDeleted, errorRecieved, upvoteIncremented, suggestionAdded} = suggestionsSlice.actions;
+export const {suggestionsRecieved, suggestionDeleted, errorRecieved, upvoteIncremented, suggestionAdded, sortedByLowestUpvotes, sortedByHighestUpvotes, sortedByLowestComments, sortedByHighestComments} = suggestionsSlice.actions;
 export default suggestionsSlice.reducer;

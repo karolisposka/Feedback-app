@@ -1,73 +1,75 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { suggestionsSelector } from "../store/selectors";
-import { suggestionsRecieved, errorRecieved } from "../store/slices/suggestionsSlice";
+import {
+  sortedByHighestUpvotes,
+  sortedByLowestUpvotes,
+  sortedByHighestComments,
+  sortedByLowestComments,
+} from "../store/slices/suggestionsSlice";
 import MainContainer from "../components/mainContainer/MainContainer";
 import Container from "../components/container/Container";
 import Section from "../components/section/Section";
-import Loader from "../components/loader/Loader";
 import Header from "../components/header/Header";
 import MobileSideMenu from "../components/mobileSideMenu/MobileSideMenu";
 import SortSection from "../components/sortSection/SortSection";
-import SuggestionsList from "../components/suggestionsList/SuggestionsList";
-import axios from "axios";
 
 //categories list for header
 
 const categories = [
   {
-    to: "/filter/all",
+    to: "/all",
     text: "all",
   },
   {
-    to: "/filter/UI",
+    to: "/UI",
     text: "UI",
   },
   {
-    to: "/filter/UX",
+    to: "/UX",
     text: "UX",
   },
   {
-    to: "/filter/Enchancment",
-    text: "Enchancment",
+    to: "/Enhancement",
+    text: "Enhancement",
   },
   {
-    to: "/filter/Bug",
+    to: "/Bug",
     text: "Bug",
   },
   {
-    to: "/filter/Feature",
+    to: "/Feature",
     text: "Feature",
   },
 ];
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [sortOption, setSortOption] = useState();
+  const navigate = useNavigate();
   const suggestions = useSelector(suggestionsSelector);
 
-  const getSuggestions = async () => {
-    try {
-      const res = await axios({
-        baseURL: process.env.REACT_APP_BASE_URL,
-        url: "v1/suggestions/get",
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      if (res.data.data) {
-        return dispatch(suggestionsRecieved(res.data.data));
-      }
-      if (res.data.err) {
-        return dispatch(errorRecieved(res.data.err));
-      }
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    navigate("/all");
+  }, []);
+
+  const sortData = (option) => {
+    switch (option) {
+      case "least":
+        return dispatch(sortedByLowestUpvotes());
+      case "most":
+        return dispatch(sortedByHighestUpvotes());
+      case "leastCom":
+        return dispatch(sortedByLowestComments());
+      case "mostCom":
+        return dispatch(sortedByHighestComments());
     }
   };
 
   useEffect(() => {
-    getSuggestions();
-  }, []);
+    sortData(sortOption);
+  }, [sortOption]);
 
   return (
     <>
@@ -76,8 +78,13 @@ const Home = () => {
         <Container>
           <MobileSideMenu />
           <Section>
-            <SortSection number={suggestions && suggestions.length} />
-            {suggestions ? <SuggestionsList list={suggestions} /> : <Loader />}
+            <SortSection
+              number={suggestions && suggestions.length}
+              handleChange={(value) => {
+                setSortOption(value);
+              }}
+            />
+            <Outlet />
           </Section>
         </Container>
       </MainContainer>
