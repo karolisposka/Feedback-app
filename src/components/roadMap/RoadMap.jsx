@@ -1,30 +1,36 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { suggestionsSelector } from "../../store/selectors";
+import { mappedSuggestionsSelector } from "../../store/selectors";
 import * as S from "./RoadMap.styles";
 import RoadMapListItem from "../roadMapListItem/RoadMapListItem";
 import Loader from "../loader/Loader";
 
 const RoadMap = ({ className }) => {
-  const suggestions = useSelector(suggestionsSelector);
+  const suggestions = useSelector(mappedSuggestionsSelector);
 
-  const items = [
-    {
-      status: "planned",
-      number: suggestions && suggestions.filter((item) => item.status.toLowerCase() === "planned").length,
-      color: "#F49F85",
-    },
-    {
-      status: "in-Progress",
-      number: suggestions && suggestions.filter((item) => item.status.toLowerCase() === "in-progress").length,
-      color: "#AD1FEA",
-    },
-    {
-      status: "live",
-      number: suggestions && suggestions.filter((item) => item.status.toLowerCase() === "live").length,
-      color: "#62BCFA",
-    },
-  ];
+  const formData = (data) => {
+    if (data) {
+      return [
+        {
+          status: "planned",
+          number: data ? data.filter((item) => item.status === "planned").length : null,
+          color: "#F49F85",
+        },
+        {
+          status: "in-Progress",
+          number: data ? data.filter((item) => item.status === "in-progress").length : null,
+          color: "#AD1FEA",
+        },
+        {
+          status: "live",
+          number: data ? data.filter((item) => item.status === "live").length : null,
+          color: "#62BCFA",
+        },
+      ];
+    } else {
+      return null;
+    }
+  };
 
   return (
     <S.Container className={className}>
@@ -33,8 +39,8 @@ const RoadMap = ({ className }) => {
         <S.StyledLink to="/roadmap/in-progress">view</S.StyledLink>
       </S.TitleWrapper>
       <S.List>
-        {items ? (
-          items.map((item, index) => (
+        {suggestions ? (
+          formData(suggestions).map((item, index) => (
             <RoadMapListItem key={index} status={item.status} color={item.color} number={item.number} />
           ))
         ) : (

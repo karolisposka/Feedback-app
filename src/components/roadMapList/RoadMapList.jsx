@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { suggestionsSelector } from "../../store/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { getData } from "../../store/slices/suggestionsSlice";
+import { mappedSuggestionsSelector } from "../../store/selectors";
 import * as S from "./RoadMapList.styles";
 import Loader from "../loader/Loader";
 
 const RoadMapList = () => {
-  const data = useSelector(suggestionsSelector);
+  const dispatch = useDispatch();
+  const suggestions = useSelector(mappedSuggestionsSelector);
   const { category } = useParams();
-  const [items, setItems] = useState();
+  const [items, setItems] = useState(null);
   const [color, setColor] = useState();
 
   const borderColor = (category) => {
@@ -49,13 +51,21 @@ const RoadMapList = () => {
   };
 
   const filterData = (data, category) => {
-    return data.filter((item) => item.status.toLowerCase() === category.toLowerCase());
+    return data.filter((item) => item.status === category.toLowerCase());
   };
 
   useEffect(() => {
-    setItems(filterData(data, category));
-    borderColor(category);
-  }, [category, data]);
+    if (!suggestions) {
+      dispatch(getData());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (suggestions && category) {
+      setItems(filterData(suggestions, category));
+      borderColor(category);
+    }
+  }, [category, suggestions]);
 
   return (
     <S.Container>

@@ -30,7 +30,7 @@ export const Image = Styled.img`
 
 export const Title = Styled.h3`
   font-size:18px;
-
+  text-align:center;
   color:${(props) => props.theme.fonts.colors.darkBlue};
 `;
 

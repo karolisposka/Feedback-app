@@ -2,6 +2,7 @@ import Styled from "styled-components";
 import Select from "../select/Select";
 import Image from "../../assets/suggestions/mobile/background-header.png";
 import ButtonSubmit from "../buttonSubmit/ButtonSubmit";
+import Notification from "../notification/Notification";
 
 export const Container = Styled.div`
   margin:36px 24px;
@@ -27,6 +28,10 @@ export const Container = Styled.div`
   }
 `;
 
+export const StyledNotification = Styled(Notification)`
+  margin:1.3rem 1rem;
+`;
+
 export const Form = Styled.form`
   padding:36px 24px;
 `;
@@ -42,7 +47,11 @@ export const StyledSelect = Styled(Select)`
 
 export const TextArea = Styled.textarea`
   width:100%;
+  box-sizing:Border-box;
   border-radius:8px;
+  padding:1rem;
+  font-size:13px;
+  color:${(props) => props.theme.fonts.colors.darkBlue};
   background:${(props) => props.theme.background.primary};
   border:none;
   outline: ${(props) => (props.error ? "1px solid #D73737" : "none")};

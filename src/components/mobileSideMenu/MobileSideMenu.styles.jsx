@@ -24,23 +24,20 @@ export const MobileMenu = Styled.div`
     height:100%;
     transition-delay: 0.3s;
     transition:0.2s ease-in-out;
-    width:${(props) => (props.display ? "75%" : "0")};
-    
+    width:${(props) => (props.display ? "75%" : "0")}; 
 `;
 
 export const RegisterBtn = Styled(Button)`
-    margin:1.5rem;
+    margin:0.5rem 1.5rem;
     padding:0.5rem 1.5rem;
-    width:calc(75% - 1.5rem);
     display:block;
-
+    box-sizing:border-box;
 `;
 
 export const LoginBtn = Styled(Button)`
-    margin:1.5rem;
+    margin: 0.5rem 1.5rem;
+    box-sizing:border-box;
     background:${(props) => props.theme.background.danger};
     padding:0.5rem 1.5rem;
-    width:calc(75% - 1.5rem);
     display:block;
-
 `;

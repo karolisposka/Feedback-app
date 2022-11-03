@@ -6,9 +6,14 @@ export const Container = Styled.div`
     width:100%;
     background:${(props) => props.theme.background.darkBlue};
     font-family:${(props) => props.theme.fonts.names.primary};
+`;
+
+export const Section = Styled.section`
+    max-width:1200px;
+    margin:0 auto;
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:center;    
 `;
 
 export const BackButton = Styled(BackBtn)`

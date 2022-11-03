@@ -1,70 +1,87 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../api";
 
 const suggestionsSlice = createSlice({
     name:'suggestions',
     initialState:{
         suggestions: null,
+        singleSuggestion: null,
         error: null,
         message: null,
+        sort: null,
     },
     reducers: {
-        suggestionsRecieved: (state, action) =>{
+        suggestionsRequested: (state, action) =>{
             return {
                 ...state,
-                suggestions: action.payload,
-                error: null,
-                message: null,
+                suggestions: null,
+                error:null,
+                message:null,
+            }
+        },
+        singleSuggestionRequested: (state, action) =>{
+            return {
+                ...state,
+                singleSuggestion: null,
+            }
+        },
+        singleSuggestionRecieved: (state, action) => {
+            return {
+                ...state,
+                singleSuggestion: action.payload,
+            }
+        },
+        suggestionsRecieved: (state, action) => {
+            return {
+                ...state,
+                suggestions: action.payload
+            }
+        },
+        suggestionEditRequested: (state, action) => {
+            return {
+                ...state,
+                error:null,
+                message:null,
+            }
+        },
+        suggestionEdited: (state, action) => {
+            return {
+                ...state,
+                message: action.payload,
+            }
+        },
+        suggestionAddRequested: (state, action) => {
+            return {
+                ...state,
+                error:null,
+                message:null,
+            }
+        },
+        suggestionAdded: (state, action) => {
+            return {
+                ...state,
+                error:null,
+                message:action.payload,
+            }
+        },
+        sortOptionSelected: (state, action) => {
+            return {
+                ...state,
+                sort: action.payload
             }
         },
         suggestionDeleted: (state, action) => {
             return {
                 ...state,
-                suggestions: state.suggestions.filter(item => item.id === action.payload),
-            }
-        },
-        suggestionAdded: (state, action) => {
-            return {
-                ...state, 
                 error: null,
                 message: action.payload,
             }
         },
-        upvoteIncremented: (state, action) => {
+        suggestionDeleteRequested: (state, action) => {
             return {
                 ...state,
-                suggestions: state.suggestions.map(item => {
-                    if (item.id === Number(action.payload)) {
-                        return { ...item, upvotes: item.upvotes + 1,}
-                    }
-                    return item
-                })
-            }
-
-        },
-        sortedByLowestUpvotes:(state, action) =>{
-            return {
-                ...state,
-                suggestions: state.suggestions.slice().sort((a,b) => a.upvotes - b.upvotes)
-            }
-        },
-
-        sortedByHighestUpvotes :(state, action) =>{
-            return {
-                ...state,
-                suggestions: state.suggestions.slice().sort((a,b) => b.upvotes - a.upvotes)
-            }
-        },
-        sortedByLowestComments:(state, action) =>{
-            return {
-                ...state,
-                suggestions: state.suggestions.slice().sort((a,b) => a.comments - b.comments)
-            }
-        },
-        
-        sortedByHighestComments :(state, action) =>{
-            return {
-                ...state,
-                suggestions: state.suggestions.slice().sort((a,b) => b.comments - a.comments)
+                error:null,
+                message: null
             }
         },
         errorRecieved: (state, action) => {
@@ -78,5 +95,90 @@ const suggestionsSlice = createSlice({
     }
 })
 
-export const {suggestionsRecieved, suggestionDeleted, errorRecieved, upvoteIncremented, suggestionAdded, sortedByLowestUpvotes, sortedByHighestUpvotes, sortedByLowestComments, sortedByHighestComments} = suggestionsSlice.actions;
+export const getData = () => (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({
+            url: `v1/suggestions/get`,
+            onStart: suggestionsRequested.type,
+            onSuccess: suggestionsRecieved.type,
+            onError: errorRecieved.type,
+        })
+    )
+};
+
+
+export const filterData = (category) => (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({
+            url: `v1/suggestions/get/${category}`,
+            onStart: suggestionsRequested.type,
+            onSuccess: suggestionsRecieved.type,
+            onError: errorRecieved.type,
+        })
+    )
+};
+
+export const editSuggestion = (data) => (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({
+            url: `v1/suggestions/edit`,
+            method:'post',
+            headers: {
+                Authorization: `Bearer ${getState().user.key}`,
+                "Content-Type": "application/json",
+            },
+            data: data,
+            onStart: suggestionEditRequested.type,
+            onSuccess: suggestionEdited.type,
+            onError: errorRecieved.type,
+        })
+    )
+};
+
+export const addSuggestion = (data) => (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({
+            url: `v1/suggestions/add`,
+            method:'post',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: data,
+            onStart: suggestionAddRequested.type,
+            onSuccess: suggestionAdded.type,
+            onError: errorRecieved.type,
+        })
+    )
+};
+
+export const deleteSuggestion = (id) => (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({
+            url: `v1/suggestions/delete/${id}`,
+            method:'delete',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            onStart: suggestionDeleteRequested.type,
+            onSuccess: suggestionDeleted.type,
+            onError: errorRecieved.type,
+        })
+    )
+};
+
+
+export const getSingleSuggestion = (id) => (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({
+            url: `v1/suggestions/single/${id}`,
+            onStart: singleSuggestionRequested.type,
+            onSuccess: singleSuggestionRecieved.type,
+            onError: errorRecieved.type,
+        })
+    ) 
+};
+
+
+
+export const {suggestionsRecieved, suggestionDeleted, suggestionDeleteRequested, sortOptionSelected, suggestionEditRequested, suggestionAddRequested, suggestionEdited, singleSuggestionRequested, singleSuggestionRecieved, errorRecieved, suggestionsRequested, suggestionAdded } = suggestionsSlice.actions;
 export default suggestionsSlice.reducer;

@@ -1,6 +1,5 @@
 import React from "react";
 import * as S from "./SuggestionsList.styles";
-import PropTypes from "prop-types";
 import Empty from "../empty/Empty";
 
 const SuggestionsList = ({ list }) => {
@@ -15,7 +14,7 @@ const SuggestionsList = ({ list }) => {
               key={index}
               text={listItem.description}
               category={listItem.category}
-              upwotes={listItem.upvotes}
+              upvotes={listItem.upvotes}
               comments={typeof listItem.comments === "object" ? listItem.comments.length : listItem.comments}
             />
           );

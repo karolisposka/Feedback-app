@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { mobileMenuContext } from "../../context/mobileContext";
+import { useSelector } from "react-redux";
+import { keySelector } from "../../store/selectors";
 import * as S from "./MobileSideMenu.styles";
 import InfoBox from "../infoBox/InfoBox";
 import Categories from "../categories/Categories";
@@ -33,6 +35,7 @@ const categories = [
 ];
 
 const MobileSideMenu = () => {
+  const key = useSelector(keySelector);
   const [displayMobileMenu] = useContext(mobileMenuContext);
 
   return (
@@ -44,8 +47,12 @@ const MobileSideMenu = () => {
         <InfoBox>
           <RoadMap />
         </InfoBox>
-        <S.RegisterBtn to="/register">Register</S.RegisterBtn>
-        <S.LoginBtn to="/login">Login</S.LoginBtn>
+        {!key && (
+          <>
+            <S.RegisterBtn to="/register">Register</S.RegisterBtn>
+            <S.LoginBtn to="/login">Login</S.LoginBtn>
+          </>
+        )}
       </S.MobileMenu>
     </S.MobileMenuContainer>
   );

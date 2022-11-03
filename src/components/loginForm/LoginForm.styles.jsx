@@ -2,9 +2,12 @@ import Styled from "styled-components";
 import Button from "../buttonSubmit/ButtonSubmit";
 
 export const Form = Styled.form`
+  margin:36px 24px;
+  font-family:${(props) => props.theme.fonts.names.primary};
   background:${(props) => props.theme.background.light};
   padding:1rem;
   border-radius:8px;
+  position:relative;
 
 `;
 

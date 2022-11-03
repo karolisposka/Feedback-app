@@ -8,5 +8,4 @@ export const Container = Styled.div`
 
 export const ContentWrapper = Styled.div`
     padding:1.5rem;
-
 `;

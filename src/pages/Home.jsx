@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { sortOptionSelected } from "../store/slices/suggestionsSlice";
 import { suggestionsSelector } from "../store/selectors";
-import {
-  sortedByHighestUpvotes,
-  sortedByLowestUpvotes,
-  sortedByHighestComments,
-  sortedByLowestComments,
-} from "../store/slices/suggestionsSlice";
 import MainContainer from "../components/mainContainer/MainContainer";
 import Container from "../components/container/Container";
 import Section from "../components/section/Section";
@@ -46,30 +41,16 @@ const categories = [
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [sortOption, setSortOption] = useState();
-  const navigate = useNavigate();
   const suggestions = useSelector(suggestionsSelector);
+  const navigate = useNavigate();
 
   useEffect(() => {
     navigate("/all");
   }, []);
 
-  const sortData = (option) => {
-    switch (option) {
-      case "least":
-        return dispatch(sortedByLowestUpvotes());
-      case "most":
-        return dispatch(sortedByHighestUpvotes());
-      case "leastCom":
-        return dispatch(sortedByLowestComments());
-      case "mostCom":
-        return dispatch(sortedByHighestComments());
-    }
+  const handleOptionSelect = (value) => {
+    dispatch(sortOptionSelected(value));
   };
-
-  useEffect(() => {
-    sortData(sortOption);
-  }, [sortOption]);
 
   return (
     <>
@@ -81,7 +62,7 @@ const Home = () => {
             <SortSection
               number={suggestions && suggestions.length}
               handleChange={(value) => {
-                setSortOption(value);
+                handleOptionSelect(value);
               }}
             />
             <Outlet />

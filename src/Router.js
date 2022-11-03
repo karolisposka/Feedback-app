@@ -16,7 +16,12 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 
 const Router = () => {
+
+
   const [displayMobileMenu, setDisplayMobileMenu] = useState(false);
+
+ 
+
   return (
     <BrowserRouter>
     <Provider store={store}>

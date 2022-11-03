@@ -21,11 +21,13 @@ const categories = [
 
 const RoadMap = () => {
   return (
-    <RoadMapContainer>
+    <>
       <RoadMapHeader />
-      <RoadMapNav categories={categories} />
-      <Outlet />
-    </RoadMapContainer>
+      <RoadMapContainer>
+        <RoadMapNav categories={categories} />
+        <Outlet />
+      </RoadMapContainer>
+    </>
   );
 };
 

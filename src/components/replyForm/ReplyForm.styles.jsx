@@ -21,15 +21,17 @@ const displayTextArea = keyframes`
 `;
 
 export const textAreaWrapper = Styled.div`
-  width:80%;
+  width:75%;
 
 `;
 
 export const TextArea = Styled.textarea`
     resize:none;
     background:${(props) => props.theme.background.primary};
+    border:none;
+    padding:1rem;
     height:70px;
-    width:100% !important;
+    width:80%;
     border-radius:8px;
     animation: ${displayTextArea} 0.3s ease-in-out;
     outline: ${(props) => (props.error ? "1px solid #D73737" : null)};
@@ -37,7 +39,7 @@ export const TextArea = Styled.textarea`
         outline: ${(props) => (props.error ? "1px solid #D73737" : "1px solid #4661E6")}
     }
     @media(min-width:486px){
-        width:80%;
+        width:100%;
     }
 
 `;
@@ -49,8 +51,10 @@ export const Error = Styled.span`
 
 export const SubmitBtn = Styled(Button)`
     background:${(props) => props.theme.background.purple};
+    padding:0.5rem 1.5rem;
+    font-size:10px;
     @media(min-width:486px){
-        padding:0.5rem 1.5rem;
+        
     }
     
 `;

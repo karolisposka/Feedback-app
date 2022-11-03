@@ -15,7 +15,7 @@ export const Link = Styled(NavLink)`
     font-weight:${(props) => props.theme.fonts.weight.bold};
     font-size:13px;
     padding:20px 0 16.5px 0;
-    width:33%;
+    width:33.33%;
     text-decoration:none;
     text-align:center;
     &.active{

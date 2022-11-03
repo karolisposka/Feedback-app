@@ -5,7 +5,8 @@ export const Container = Styled.div`
   display:flex;
   flex-wrap:wrap;
   background:${(props) => props.theme.background.primary};
-  margin:1rem;
+  padding:1rem;
+  height:100%;
 `;
 
 export const ListCard = Styled(SuggestionCard)`

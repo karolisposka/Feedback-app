@@ -1,13 +1,11 @@
 import React from "react";
 import * as S from "./Categories.styles";
 import PropTypes from "prop-types";
-import CategoryItem from "../categoryItem/CategoryItem";
 
 const Categories = ({ categories, className }) => {
   return (
     <S.CategoriesList className={className}>
-      {categories &&
-        categories.map((category, index) => <CategoryItem to={category.to} key={index} text={category.text} />)}
+      {categories && categories.map((category, index) => <S.Card to={category.to} key={index} text={category.text} />)}
     </S.CategoriesList>
   );
 };

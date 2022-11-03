@@ -1,5 +1,5 @@
 import Styled from "styled-components";
-import Button from "../button/Button";
+import Button from "../buttonSubmit/ButtonSubmit";
 import BackBtn from "../backButton/BackBtn";
 
 export const Header = Styled.div`
@@ -16,6 +16,7 @@ export const Back = Styled(BackBtn)`
 
 export const EditButton = Styled(Button)`
   background:${(props) => props.theme.fonts.colors.info};
+  font-family:${(props) => props.theme.fonts.names.primary};
   /* padding:0.5rem 1rem; */
 
 `;

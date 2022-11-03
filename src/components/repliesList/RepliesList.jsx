@@ -7,14 +7,7 @@ const RepliesList = ({ replies }) => {
       <S.List>
         {replies &&
           replies.map((reply, index) => (
-            <S.Card
-              key={index}
-              content={reply.content}
-              username={reply.user[0].username}
-              name={reply.user[0].name}
-              id={reply.id}
-              imageUrl={"null"}
-            />
+            <S.Card key={index} content={reply.content} userInfo={reply.user} id={reply.id} />
           ))}
       </S.List>
     </S.Container>

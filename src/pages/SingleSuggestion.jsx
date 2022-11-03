@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { postComment } from "../store/slices/commentsSlice";
+import { getSingleSuggestion } from "../store/slices/suggestionsSlice";
+import { singleSuggestionMappedSelector } from "../store/selectors";
+import { keySelector } from "../store/selectors";
+import { getUsersInfo } from "../store/slices/usersSlice";
+import { getComments } from "../store/slices/commentsSlice";
+import { getReplies } from "../store/slices/repliesSlice";
+import { getUpvotes } from "../store/slices/upvotesSlice";
 import SingleSuggestionContainer from "../components/singleSuggestionContainer/SingleSuggestionContainer";
 import SuggestionsList from "../components/suggestionsList/SuggestionsList";
 import SingleSuggestionHeader from "../components/singleSuggestionHeader/SingleSuggestionHeader";
@@ -9,67 +17,45 @@ import Loader from "../components/loader/Loader";
 import AddComment from "../components/addCommentForm/AddComment";
 
 const SingleSuggestion = () => {
-  const [data, setData] = useState(null);
+  const dispatch = useDispatch();
+  const key = useSelector(keySelector);
+  const suggestion = useSelector(singleSuggestionMappedSelector);
   const { id } = useParams();
 
-  const getData = async (id) => {
-    try {
-      const res = await axios({
-        baseURL: process.env.REACT_APP_BASE_URL,
-        url: `/v1/suggestions/single/${id}`,
-        method: "get",
-      });
-      if (res.data.data) {
-        setData(res.data.data);
-      } else {
-        console.log("something wrong with the server. Please try again later");
-      }
-    } catch (err) {
-      console.log("Something is wrong with the server. Cannot get data");
-    }
-  };
-
-  const handleSubmit = async (values, id) => {
-    try {
-      const res = await axios({
-        baseURL: process.env.REACT_APP_BASE_URL,
-        url: "v1/comments/add",
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          ...values,
-          suggestion_id: id,
-        },
-      });
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-      console.log("Something wrong with the server. Please try again later");
-    }
-  };
-
   useEffect(() => {
-    getData(id);
-  }, []);
+    dispatch(getSingleSuggestion(id));
+    if (!suggestion) {
+      dispatch(getUsersInfo());
+      dispatch(getComments());
+      dispatch(getReplies());
+      dispatch(getUpvotes());
+    }
+  }, [id]);
+
+  const handleSubmit = (data) => {
+    dispatch(postComment({ ...data, suggestion_id: id }));
+  };
 
   return (
     <SingleSuggestionContainer>
       <SingleSuggestionHeader />
-      {data ? (
+      {suggestion ? (
         <>
-          <SuggestionsList list={data} />
-          <CommentsList comments={data} />
+          <SuggestionsList list={suggestion} />
+          <CommentsList comments={suggestion[0].comments} />
         </>
       ) : (
         <Loader />
       )}
-      <AddComment
-        handleSubmit={(values) => {
-          handleSubmit(values, id);
-        }}
-      />
+      {key && (
+        <>
+          <AddComment
+            handleSubmit={(values) => {
+              handleSubmit(values);
+            }}
+          />
+        </>
+      )}
     </SingleSuggestionContainer>
   );
 };

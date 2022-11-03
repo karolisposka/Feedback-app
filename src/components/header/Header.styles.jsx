@@ -19,7 +19,7 @@ export const Header = Styled.header`
     }
     @media(min-width:768px){
         width: 25%;
-        min-height:100vh;
+        height:100%;
         margin:2rem 0;
         background: ${(props) => props.theme.background.primary};
     }
@@ -95,7 +95,7 @@ export const Box = Styled(InfoBox)`
         width:calc(33% - 0.5rem)!important;
         margin:0;
         height:100%;
-        &&:last-of-type{
+        &&:nth-of-type(4){
             display:none;
         }
     }

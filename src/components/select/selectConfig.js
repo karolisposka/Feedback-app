@@ -16,9 +16,10 @@ export const newFeedbackCategories = {
     }),
     control: (provided, state) => ({
       ...provided,
-      outline: state.isSelected ? '1px solid blue' : 'none',
+      outline: state.isSelected ? '1px solid #D73737' : 'none',
       background: "#F2F2F2",
       border:'none',
+      fontSize:13,
       display: "flex",
       padding:6,
       borderRadius:5,
@@ -50,7 +51,6 @@ export const newFeedbackCategories = {
 export const customStyles = {
   option: (provided, state) => ({
     ...provided,
-
     color: state.isSelected ? "#AD1FEA" : "#647196",
     transition: "0.3s ease-in-out",
     fontSize: 13,
@@ -67,6 +67,8 @@ export const customStyles = {
   control: () => ({
     background: "trasparent",
     display: "flex",
+    width:'100%',
+    color: 'white',
   }),
   dropdownIndicator: (provided, state) => ({
     ...provided,

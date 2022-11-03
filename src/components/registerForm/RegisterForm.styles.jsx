@@ -2,10 +2,13 @@ import Styled from "styled-components";
 import Button from "../buttonSubmit/ButtonSubmit";
 
 export const Form = Styled.form`
+  margin:36px 24px;
   background:${(props) => props.theme.background.light};
+  font-family:${(props) => props.theme.fonts.names.primary};
   padding:1rem;
   border-radius:8px;
-
+  position:relative;
+  overflow:hidden;
 `;
 
 export const Title = Styled.h3`

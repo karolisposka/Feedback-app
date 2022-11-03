@@ -1,6 +1,7 @@
 import Styled from "styled-components";
 import Image from "../../assets/suggestions/mobile/background-header.png";
 import Button from "../buttonSubmit/ButtonSubmit";
+import Notification from "../notification/Notification";
 
 export const Container = Styled.div`
     margin:36px 24px;
@@ -30,17 +31,25 @@ export const Form = Styled.form`
     padding:36px 24px;
 `;
 
+export const StyledNotification = Styled(Notification)`
+    margin: 1.3rem 1rem;
+`;
+
 export const Title = Styled.h3`
     font-size:18px;
     color:${(props) => props.theme.fonts.colors.darkBlue};
+    padding:0 0.5rem;
     
 `;
 
 export const Textarea = Styled.textarea`
     resize:none;
-    width:100%;
+    width:calc(100% - 2rem);
     height:100px;
+    font-size:13px;
+    padding:1rem;
     background:${(props) => props.theme.background.primary};
+    color:${(props) => props.theme.fonts.colors.darkBlue};
     outline:${(props) => (props.error ? "1px solid #D73737" : null)};
     border-radius:8px;
     border:none;

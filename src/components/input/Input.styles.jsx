@@ -16,17 +16,23 @@ export const Comment = Styled.p`
     font-weight:${(props) => props.theme.fonts.weight.medium};    
 `;
 
-export const Input = Styled.input`
-    width:100%;
-    box-sizing:border-box;
-    padding:15px 0;
-    border-radius:8px;
-    outline: ${(props) => (props.error ? "1px solid red" : null)};
-    border:none;
+export const InputWrapper = Styled.div`
+    width:calc(100% - 2rem);
     background:${(props) => props.theme.background.primary};
-    &:focus{
-        outline:  1px solid blue;
-    }
+    padding:15px;
+    border-radius:8px;
+    border: ${(props) => props.focused && "1px solid #4661E6"};
+    border: ${(props) => props.error && !props.focused && "1px solid #D73737"};
+    border: ${(props) => props.error && props.focused && "1px solid #D73737"};
+`;
+
+export const Input = Styled.input`
+    box-sizing:border-box;
+    background:transparent;
+    outline:none;
+    color:${(props) => props.theme.fonts.colors.darkBlue};
+    font-size:13px;
+    border:none;
 `;
 
 export const Span = Styled.p`

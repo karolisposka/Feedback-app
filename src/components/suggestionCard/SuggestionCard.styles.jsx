@@ -1,6 +1,5 @@
 import Styled from "styled-components";
 import Title from "../title/Title";
-import CategoryItem from "../categoryItem/CategoryItem";
 import { BsFillChatFill } from "react-icons/bs";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 
@@ -16,7 +15,6 @@ export const Container = Styled.div`
     grid-template-columns: 0.25fr 0.25fr 2.5fr 0.25fr;
     grid-template-rows: 0.25fr 0.5fr 0.25fr;
   }
-
 `;
 
 export const CardTitle = Styled(Title)`
@@ -80,6 +78,9 @@ export const Upvotes = Styled.div`
   justify-content:center;
   padding:8px;
   width:75%;
+  &:focus(){
+    color:red;
+  }
   @media(min-width:486px){
     grid-column: 1;
     grid-row: 1/3;
@@ -104,6 +105,7 @@ export const Comments = Styled.div`
   display:flex;
   align-items:center;
   justify-content:flex-end;
+  cursor:pointer;
   @media(min-width:486px){
     grid-column: 3;
     grid-row: 2;
@@ -112,7 +114,6 @@ export const Comments = Styled.div`
 
 export const ChatIcon = Styled(BsFillChatFill)`
   color:${(props) => props.theme.background.primary};
-  cursor:pointer;
   margin-right:4px;
 `;
 

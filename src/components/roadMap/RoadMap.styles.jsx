@@ -16,6 +16,9 @@ export const Title = Styled.h1`
     line-height:19px;
     margin:0;
     color:${(props) => props.theme.fonts.colors.darkBlue};
+    @media(min-width:486px) and (max-width:768px){
+        font-size:13px;
+    }
     
 `;
 

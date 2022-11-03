@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as S from "./AddFeedbackContainer.styles";
+import * as S from "./FormContainer.styles";
 
-const AddFeedbackContainer = ({ children }) => {
+const FormContainer = ({ children }) => {
   return (
     <S.Container>
       <S.Section>{children}</S.Section>
@@ -10,8 +10,8 @@ const AddFeedbackContainer = ({ children }) => {
   );
 };
 
-AddFeedbackContainer.propTypes = {
+FormContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default AddFeedbackContainer;
+export default FormContainer;

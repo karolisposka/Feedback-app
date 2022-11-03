@@ -1,18 +1,24 @@
 import React from "react";
 import * as S from "./EditSuggestionForm.styles";
-import Input from "../input/Input";
+import { Categories, status } from "../select/selectConfig";
+import { useSelector } from "react-redux";
+import { suggestionMessageSelector, suggestionErrorSelector } from "../../store/selectors";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Input from "../input/Input";
 import Select from "../select/Select";
-import { Categories, status } from "../select/selectConfig";
+import { newFeedbackCategories } from "../select/selectConfig";
 
-const EditSuggestionForm = ({ suggestionTitle }) => {
+const EditSuggestionForm = ({ suggestionTitle, category, stat, description, handleSubmit, handleDelete }) => {
+  const message = useSelector(suggestionMessageSelector);
+  const error = useSelector(suggestionErrorSelector);
   const formik = useFormik({
     initialValues: {
-      title: "",
-      category: "",
-      status: "",
-      description: "",
+      title: suggestionTitle,
+      category: category,
+      status: stat,
+      description: description,
     },
     validationSchema: Yup.object({
       title: Yup.string().required(),
@@ -21,7 +27,7 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
       description: Yup.string().max(249).required(),
     }),
     onSubmit: (value) => {
-      console.log(value);
+      handleSubmit(value);
       formik.resetForm();
     },
   });
@@ -34,7 +40,9 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
     <>
       <S.Container>
         <S.Form onSubmit={formik.handleSubmit}>
-          <S.Title>Editing {suggestionTitle} </S.Title>
+          {error && <S.StyledNotification color="#D73737">{error.err}</S.StyledNotification>}
+          {message && <S.StyledNotification color="#4BB543">{message.msg}</S.StyledNotification>}
+          <S.Title>Editing '{suggestionTitle}' </S.Title>
           <Input
             name="title"
             error={formik.errors.title && formik.touched.title ? formik.errors.title : null}
@@ -43,6 +51,7 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
             comment="Add a short, descriptive headline"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
+            value={formik.values.title}
           />
           <Input
             label="Category"
@@ -53,6 +62,8 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
               name="category"
               placeholder="Choose category"
               options={Categories}
+              styles={newFeedbackCategories}
+              defaultValue={{ label: category, value: category }}
               handleChange={(value) => {
                 formik.setFieldValue("category", value);
               }}
@@ -69,7 +80,9 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
             <Select
               name="status"
               options={status}
+              defaultValue={{ label: stat, value: stat }}
               placeholder="Choose status"
+              styles={newFeedbackCategories}
               handleChange={(value) => {
                 formik.setFieldValue("status", value);
               }}
@@ -79,8 +92,8 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
             />
           </Input>
           <Input
-            label="Update Status"
-            comment="Choose feature state"
+            label="Description"
+            comment="Short description"
             error={formik.errors.description && formik.touched.description ? formik.errors.description : null}
           >
             <S.Textarea
@@ -88,6 +101,7 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
               onChange={formik.handleChange}
               error={formik.errors.description}
               onBlur={formik.handleBlur}
+              value={formik.values.description}
             />
           </Input>
           <S.ButtonsWrapper>
@@ -100,12 +114,23 @@ const EditSuggestionForm = ({ suggestionTitle }) => {
             >
               Cancel
             </S.CancelBtn>
-            <S.DeleteBtn type="button"> Delete </S.DeleteBtn>
+            <S.DeleteBtn type="button" handleClick={handleDelete}>
+              Delete
+            </S.DeleteBtn>
           </S.ButtonsWrapper>
         </S.Form>
       </S.Container>
     </>
   );
+};
+
+EditSuggestionForm.propTypes = {
+  suggestionTitle: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  stat: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default EditSuggestionForm;
