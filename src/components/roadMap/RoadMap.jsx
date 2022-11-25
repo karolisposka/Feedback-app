@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { mappedSuggestionsSelector } from "../../store/selectors";
 import * as S from "./RoadMap.styles";
 import RoadMapListItem from "../roadMapListItem/RoadMapListItem";
-import Loader from "../loader/Loader";
 
 const RoadMap = ({ className }) => {
   const suggestions = useSelector(mappedSuggestionsSelector);
@@ -44,7 +43,7 @@ const RoadMap = ({ className }) => {
             <RoadMapListItem key={index} status={item.status} color={item.color} number={item.number} />
           ))
         ) : (
-          <Loader />
+          <S.StyledLoader />
         )}
       </S.List>
     </S.Container>

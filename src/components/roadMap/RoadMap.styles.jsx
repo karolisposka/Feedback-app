@@ -1,4 +1,5 @@
 import Styled from "styled-components";
+import Loader from "../loader/Loader";
 import { Link } from "react-router-dom";
 
 export const Container = Styled.div`
@@ -30,4 +31,9 @@ export const StyledLink = Styled(Link)`
 
 export const List = Styled.div`
     margin:10px  0px;
+`;
+
+export const StyledLoader = Styled(Loader)`
+    height:100%;
+
 `;

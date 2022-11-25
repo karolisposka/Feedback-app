@@ -1,9 +1,9 @@
 import React from "react";
 import * as S from "./Loader.styles";
 
-const Loader = () => {
+const Loader = ({ className }) => {
   return (
-    <S.Container>
+    <S.Container className={className}>
       <S.Loader>
         <S.LoaderElement />
         <S.LoaderElement />

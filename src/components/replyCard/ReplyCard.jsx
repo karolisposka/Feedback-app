@@ -33,7 +33,7 @@ const ReplyCard = ({ userInfo, content, className, id }) => {
 
 ReplyCard.propTypes = {
   content: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   userInfo: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,

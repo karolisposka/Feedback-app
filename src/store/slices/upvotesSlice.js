@@ -4,7 +4,8 @@ import { apiCallBegan } from "../api";
 const upvotesSlice = createSlice({
     name:'upvotes',
     initialState:{
-        upvotes: null,
+        upvotes: [],
+        error:''
         
     },
     reducers: {
@@ -18,6 +19,12 @@ const upvotesSlice = createSlice({
             return {
                 ...state,
                 upvotes: action.payload,
+            }
+        },
+        errorRecieved: (state, action) => {
+            return {
+                ...state, 
+                error: action.payload,
             }
         },
         upvoteIncremented: (state, action) => {
@@ -35,6 +42,7 @@ export const getUpvotes = () => (dispatch, getState) => {
         apiCallBegan({
             url: `v1/upvotes/get`,
             onSuccess: upvotesRecieved.type,
+            onError: errorRecieved.type,
         })
     )
 }
@@ -60,6 +68,7 @@ export const {
     upvoteIncremented,
     upvoteRequested,
     upvotesRecieved,
+    errorRecieved
 } = upvotesSlice.actions;
 
 
