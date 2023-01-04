@@ -158,6 +158,7 @@ export const deleteSuggestion = (id) => (dispatch, getState) => {
             method:'delete',
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${getState().user.key}`,
             },
             onStart: suggestionDeleteRequested.type,
             onSuccess: suggestionDeleted.type,

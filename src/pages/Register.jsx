@@ -37,6 +37,7 @@ const Register = () => {
         return alert("something went wrong. Please try again later");
       }
     } catch (err) {
+      console.log(err);
       if (err.response.data.err) {
         return dispatch(errorRecieved(err.response.data.err));
       }

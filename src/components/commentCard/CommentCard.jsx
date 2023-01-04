@@ -61,7 +61,7 @@ CommentCard.propTypes = {
   userInfo: PropTypes.shape({
     name: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
   }),
 };
 

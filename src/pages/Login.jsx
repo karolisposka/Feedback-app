@@ -34,7 +34,7 @@ const Login = () => {
         return navigate("/");
       }
     } catch (err) {
-      dispatch(errorRecieved(err.response.data.err));
+      dispatch(errorRecieved(err.response.data));
     }
   };
 
