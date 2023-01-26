@@ -130,8 +130,8 @@ export const Categories = [
       label: "UX",
     },
     {
-      value: "Enhancment",
-      label: "Enhancment",
+      value: "Enhancement",
+      label: "Enhancement",
     },
     {
       value: "Bug",
