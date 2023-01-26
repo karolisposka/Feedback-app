@@ -17,11 +17,10 @@ const repliesSlice = createSlice({
             }
         },
         replyAdded: (state, action) =>{
-            const newReply = state.replies.concat(action.payload)
             return {
                 ...state,
                 status: 'recieved',
-                replies: newReply,
+                replies: [...state.replies, action.payload],
             }
         },
         repliesRecieved: (state, action) => {
